@@ -1,3 +1,5 @@
+'use client'
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,10 +13,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
 import NavItems from "./NavItems";
+import { useRouter } from "next/navigation";
 const name = { name: "Bogdan", email: "stockmarcket2026@i.ua" };
 const DropDownMenu = () => {
+  const router = useRouter();
   const handleSignOut = () =>{
-
+    router.push('/sign-in')
   }
   return (
     <DropdownMenu>
