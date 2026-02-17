@@ -32,9 +32,11 @@ type CountrySelectProps = {
 const CountrySelect = ({
   value,
   onChange,
+  id
 }: {
   value: string;
   onChange: (value: string) => void;
+  id: string;
 }) => {
   const [open, setOpen] = useState(false);
   const countries = countryList().getData();
@@ -53,6 +55,7 @@ const CountrySelect = ({
           role="combobox"
           aria-expanded={open}
           className="country-select-trigger"
+          id={id}
         >
           {value ? (
             <span className="flex items-center gap-2">
@@ -109,7 +112,7 @@ const CountrySelect = ({
   );
 };
 
-const CountrySelectField = ({
+export const CountrySelectField = ({
   name,
   label,
   control,
@@ -118,7 +121,7 @@ const CountrySelectField = ({
 }: CountrySelectProps) => {
   return (
     <div className="space-y-2">
-      <Label htmlFor={name} className="form-label">
+      <Label htmlFor={name} className="form-label" >
         {label}
       </Label>
       <Controller
@@ -128,7 +131,7 @@ const CountrySelectField = ({
           required: required ? `Please select ${label.toLowerCase()}` : false,
         }}
         render={({ field }) => (
-          <CountrySelect value={field.value} onChange={field.onChange} />
+          <CountrySelect value={field.value} onChange={field.onChange} id={name} />
         )}
       />
       {error && <p className="text-sm text-red-500">{error.message}</p>}
@@ -139,4 +142,4 @@ const CountrySelectField = ({
   );
 };
 
-export default CountrySelectField;
+

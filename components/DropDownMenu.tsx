@@ -14,10 +14,11 @@ import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
 import NavItems from "./NavItems";
 import { useRouter } from "next/navigation";
-const name = { name: "Bogdan", email: "stockmarcket2026@i.ua" };
-const DropDownMenu = () => {
+import { signOut } from "better-auth/api";
+const DropDownMenu = ({user}: {user: User}) => {
   const router = useRouter();
-  const handleSignOut = () =>{
+  const handleSignOut = async () =>{
+    await signOut();
     router.push('/sign-in')
   }
   return (
@@ -25,17 +26,17 @@ const DropDownMenu = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center gap-3 text-gray-4 haver:text-yellow-300"
+          className="flex items-center gap-3 text-gray-4 hover:text-yellow-300"
         >
           <Avatar className="h-8 w-8">
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
-              {name.name[0]}
+              {user.name[0]}
             </AvatarFallback>
           </Avatar>
           <div className="hidden md:flex flex-col items-start">
             <span className="text-base font-medium text-gray-400">
-              {name.name}
+              {user.name}
             </span>
           </div>
         </Button>
@@ -46,14 +47,14 @@ const DropDownMenu = () => {
             <Avatar className="h-8 w-8">
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback className="bg-yellow-500 text-yellow-900 text-sm font-bold">
-                {name.name[0]}
+                {user.name[0]}
               </AvatarFallback>
             </Avatar>
             <div className="hidden md:flex flex-col items-start">
               <span className="text-base font-medium text-gray-400">
-                {name.name}
+                {user.name}
               </span>
-              <span className="text-sm text-gray-500">{name.email}</span>
+              <span className="text-sm text-gray-500">{user.email}</span>
             </div>
           </div>
         </DropdownMenuLabel>
