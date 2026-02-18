@@ -14,10 +14,11 @@ import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
 import NavItems from "./NavItems";
 import { useRouter } from "next/navigation";
-import { signOut } from "better-auth/api";
+import { signOut } from "@/lib/actions/stock-market.action";
 const DropDownMenu = ({user}: {user: User}) => {
   const router = useRouter();
   const handleSignOut = async () =>{
+
     await signOut();
     router.push('/sign-in')
   }
