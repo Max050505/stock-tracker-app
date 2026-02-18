@@ -3,7 +3,7 @@ import Link from "next/link"
 import NavItems from "./NavItems"
 import DropDownMenu from "./DropDownMenu"
 
-const Header = () => {
+const Header = ({user}: {user: any}) => {
   return (
     <header className="sticky top-0 header">
       <div className="container header-wrapper">
@@ -13,7 +13,7 @@ const Header = () => {
         <nav className="hidden sm:block">
         <NavItems/>
         </nav>
-        <DropDownMenu/>
+        <DropDownMenu user={user}/>
       </div>
     </header>
   )

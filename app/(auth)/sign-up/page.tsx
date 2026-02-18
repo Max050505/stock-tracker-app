@@ -1,15 +1,18 @@
 "use client";
-import CountrySelectField from "@/components/forms/CountrySelectField";
+import {CountrySelectField} from "@/components/forms/CountrySelectField";
 import FooterLink from "@/components/forms/FooterLink";
 import InputField from "@/components/forms/InputField";
 import SelectField from "@/components/forms/SelectedField";
 import { Button } from "@/components/ui/button";
+import { signUpWithEmail } from "@/lib/actions/stock-market.action";
 import {
   INVESTMENT_GOALS,
   PREFERRED_INDUSTRIES,
   RISK_TOLERANCE_OPTIONS,
 } from "@/lib/constants";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 const SignUp = () => {
   const {
     register,
@@ -28,12 +31,24 @@ const SignUp = () => {
     },
     mode: "onBlur",
   });
-  const onSubmit = async (data: SignInFormData) => {
+  const router = useRouter();
+  
+
+  const onSubmit = async (data: SignUpFormData) => {
+
     try {
-      console.log(data);
-    } catch (e) {
-      console.log(e);
-    }
+        const result = await signUpWithEmail(data);
+        console.log("Signup result:", result);
+        if(result.success){
+          console.log("Redirecting...", result);
+          router.push('/');
+
+          toast.success('Account created successfully! Welcome to Signalist.');
+        }
+      } catch (e) {
+        console.log(e);
+        toast.error('Sign up failed. Please try again.', {description: e instanceof Error ? e.message : 'An unexpected error occurred.'});
+      }
   };
   return (
     <>
@@ -76,6 +91,7 @@ const SignUp = () => {
           control={control}
           error={errors.country}
           required
+          
         />
 
         <SelectField
@@ -115,7 +131,7 @@ const SignUp = () => {
         >
           {isSubmitting ? "Creating Account" : "Start your investing journey"}
         </Button>
-        <FooterLink text="Already have account ?" linkText="Sign in" href="signIn"/>
+        <FooterLink text="Already have account? " linkText="Sign in" href="signIn"/>
       </form>
     </>
   );
