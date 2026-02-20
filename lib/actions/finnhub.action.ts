@@ -56,12 +56,12 @@ export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> 
       // Round-robin up to 6 picks
       for (let round = 0; round < maxArticles; round++) {
         for (let i = 0; i < cleanSymbols.length; i++) {
-          const sym = cleanSymbols[i];
-          const list = perSymbolArticles[sym] || [];
+          const sum = cleanSymbols[i];
+          const list = perSymbolArticles[sum] || [];
           if (list.length === 0) continue;
           const article = list.shift();
           if (!article || !validateArticle(article)) continue;
-          collected.push(formatArticle(article, true, sym, round));
+          collected.push(formatArticle(article, true, sum, round));
           if (collected.length >= maxArticles) break;
         }
         if (collected.length >= maxArticles) break;

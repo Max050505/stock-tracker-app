@@ -131,7 +131,7 @@ const SignUp = () => {
         >
           {isSubmitting ? "Creating Account" : "Start your investing journey"}
         </Button>
-        <FooterLink text="Already have account? " linkText="Sign in" href="signIn"/>
+        <FooterLink text="Already have account? " linkText="Sign in" href="sign-in"/>
       </form>
     </>
   );
