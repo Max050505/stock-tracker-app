@@ -39,8 +39,8 @@ const SignUp = () => {
     try {
         const result = await signUpWithEmail(data);
         if(result.success){
-          router.push('/');
-
+          router.push("/");
+          console.log("✅ redirecting...");
           toast.success('Account created successfully! Welcome to Signalist.');
         }
       } catch (e) {
