@@ -4,7 +4,7 @@ import { sendSignUpEmail, sendDailyNewsSummary } from "@/lib/inngest/functions";
 
 export const {POST, GET, PUT} = serve({
     client: inngest,
-    signingKey: process.env.INNGEST_SIGNING_KEY,
+    signingKey: process.env.SIGNING_KEY,
     functions: [sendSignUpEmail, sendDailyNewsSummary]
 })
 
