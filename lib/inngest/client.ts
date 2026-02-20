@@ -5,4 +5,4 @@ export const inngest = new Inngest({
     apiKey: process.env.INNGEST_EVENT_KEY,
     ai: {gemini: {apiKey: process.env.GEMINI_API_KEY!}}
 })
-console.log("CLICK");
+
