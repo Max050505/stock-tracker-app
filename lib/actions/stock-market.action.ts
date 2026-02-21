@@ -18,6 +18,7 @@ export const signUpWithEmail = async ({
     const response = await auth.api.signUpEmail({
       body: { email, password, name: fullName },
     });
+    console.log("SIGNUP RESPONSE:", response);
 
     if (response) {
       await inngest.send({
